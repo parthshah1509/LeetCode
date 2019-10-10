@@ -1,0 +1,27 @@
+public static void merge(List<Stream> inputStreams, Stream outputStream) {
+  PriorityQueue<PQKeyVal> q = new PriorityQueue<PQKeyVal>();
+  for (Stream s: inputStreams) {
+    q.add(new PQKeyVal(s));
+  }
+  for (;;)
+  {
+    PQKeyVal top = q.poll();
+    outputStream.put(top.key);
+    top.stream.poll();
+    q.offer(new PQKeyVal(top.stream));
+  }
+}
+
+class PQKeyVal implements Comparable<PQKeyVal> {
+  public final int key;
+  public final Stream stream;
+  public PQKeyVal(Stream stream) {
+    this.stream = stream;
+    this.key = stream.peek();
+  }
+
+  @Override
+  public int compareTo(PQKeyVal that) {
+    return this.key - that.key;
+  }
+}

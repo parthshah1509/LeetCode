@@ -1,0 +1,39 @@
+324. Wiggle Sort II
+
+Given an unsorted array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3]....
+
+Example 1:
+
+Input: nums = [1, 5, 1, 1, 6, 4]
+Output: One possible answer is [1, 4, 1, 5, 1, 6].
+
+----------------------------------------------------------------------------------------------------------
+
+class Solution {
+    public void wiggleSort(int[] nums) {
+        boolean less = true;
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+         
+        Arrays.sort(nums);
+        int n = nums.length;
+         
+        int[] temp = new int[n];
+        int left = (n - 1) / 2;
+        int right = n - 1;
+         
+        for (int i = 0; i < n; i++) {
+            if (less) {
+                temp[i] = nums[left];
+                left--;
+            } else {
+                temp[i] = nums[right];
+                right--;
+            }
+            less = !less;
+        }
+         
+        System.arraycopy(temp, 0, nums, 0, n);
+    }
+}

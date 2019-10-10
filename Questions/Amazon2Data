@@ -1,0 +1,14 @@
+Implement union and intersection of two array(in a efficient way).
+
+Additional information given by the interviewer was: elements of the two given array may be repeated but cannot be repeated in union and intersection array.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Union : (Assuming order of element doesn't matter )
+
+Put all the elements of both arrays in HashSet , now Hashset will have union of both the arrays.
+
+Intersection: (Assuming order of element doesn't matter )
+
+Put all the elements of one array in HashSet.
+Iterate over other array and check whether element is present HashSet created in previous step if yes include it in intersection result else ignore.

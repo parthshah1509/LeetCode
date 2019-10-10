@@ -1,0 +1,62 @@
+13. Roman to Integer
+
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+-----------------------------------------------------------------------------------
+
+class Solution {
+    public int romanToInt(String s) {
+        int[] romans = new int[26];
+        romans['I' - 'A'] = 1;
+        romans['V' - 'A'] = 5;
+        romans['X' - 'A'] = 10;
+        romans['L' - 'A'] = 50;
+        romans['C' - 'A'] = 100;
+        romans['D' - 'A'] = 500;
+        romans['M' - 'A'] = 1000;
+        
+        int result = 0;
+        char[] arr = s.toCharArray();
+        int lastIndexValue = 1000;
+        for (int i = 0; i < arr.length; i++) {
+            int currentIndexValue = romans[arr[i] - 'A'];
+            if (currentIndexValue <= lastIndexValue) {
+                result += currentIndexValue;
+            } else {
+                result = result - 2 * lastIndexValue + currentIndexValue;
+            }
+            lastIndexValue = currentIndexValue;
+        }
+        return result;
+    }
+}
+
+-----------------------------------------------------------------------------------
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        dic1 = {
+            "I" : 1,
+            "V" : 5,
+            "X" : 10,
+            "L" : 50,
+            "C" : 100,
+            "D" : 500,
+            "M" : 1000,
+            "IV" : 4,
+            "IX" : 9,
+            "XL" : 40,
+            "XC" : 90,
+            "CD" : 400,
+            "CM" : 900
+        }
+        sum1 = 0
+        i=0
+        while i < len(s):
+            if i<len(s)-1 and s[i]+s[i+1] in dic1:
+                sum1+= dic1[s[i]+s[i+1]]
+                i+=1
+            else:
+                sum1+= dic1[s[i]]
+            i+=1
+        return sum1

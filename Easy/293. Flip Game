@@ -1,0 +1,22 @@
+293. Flip Game
+
+flip two ++ to --, who cannot make move wins, show all possible states
+
+---------------------------------------------------------------------------
+
+class Solution {
+    public List<String> generatePossibleNextMoves(String s) {
+    	List<String> possibleStates = new ArrayList<>();
+    	int i = 0;
+    	while(i < s.length()){
+    		int nextMove = i = 0 ? s.indexOf("++") : s.indexOf("++", i);
+    		if(nextMove == -1)
+    			return possibleStates;
+
+    		String ns = s.substring(0,nextMove) + "--" + s.substring(nextMove + 2);
+    		possibleStates.add(ns);
+    		i = nextMove + 1;
+    	}
+    	return possibleStates;
+    }
+}

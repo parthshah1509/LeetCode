@@ -1,0 +1,19 @@
+Question is about line segments not the lines. Each line segment is represented with the start and their end points and the intercept point on the axis. And another boolean to represent if the line segment is horizontal or vertical.
+
+Example: 10 20 5 V represents a line which is vertical and its x-intercept is 5 and start from 10 and ends at 20 ie., points are (5, 10) (5, 20) represents the line
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+h = int(input("Enter number of horizontal lines : "))
+v = int(input("Enter number of vertical lines : "))
+result = 0
+small = min(h,v)
+for i in range(-1,small):
+    result += ((h-i)*(v-i))
+print("Number of squares : ", result)
+
+-------------------------------------------
+
+This problem can be treated as 4Sum. If any 4 lines create 4 intersection points then you've got yourself a square.
+If you specifically need square and not rectangles then add another check to make sure all the 4 intersections points generate lines of same length.
+
