@@ -1,0 +1,9 @@
+Congruence Modulo 3
+
+a is CM3 b iff (a%3) == (b%3)
+
+---------------------------------------------------------------------------------------------
+
+class Solution:
+    def checkModulo3(a, b) -> bool:
+        return a%3 == b%3

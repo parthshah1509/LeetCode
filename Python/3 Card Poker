@@ -1,0 +1,12 @@
+3 Card Poker
+
+----------------------------------------------------------------------
+
+poker_players = [PokerHand(k, v) for k, v in self.players.items()]
+        for i in range(len(poker_players[0].ranks)):
+            highest_rank = max([player.ranks[i] for player in poker_players])
+            poker_players = [
+                player for player in poker_players if player.ranks[i] == highest_rank]
+            if len(poker_players) == 1:
+                return poker_players[0].id
+        return " ".join([player.id for player in poker_players])
