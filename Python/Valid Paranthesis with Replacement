@@ -1,0 +1,26 @@
+Valid Paranthesis with Replacement
+
+class solution:
+	def isValid(s:str,k:int) -> bool:
+	    stack = []
+	    for i in s:
+	        print(i)
+	        if i == '<':
+	            stack.append(i)
+	        else:
+	            if not stack:
+	                if k==0:
+	                    return False
+	                else:
+	                    k-=1
+	            else:
+	                stack.pop()
+	        print(stack)
+	    
+	    return not stack
+    
+
+
+print("Hello World")
+# print(not [])
+print(isValid("<><>><>><>>>>>",7))

@@ -16,7 +16,7 @@ Note: You may assume there is no extra space or special characters in the input 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class Solution:
+class Solution
     def validIPAddress(self, IP: str) -> str:
         
         def isIPv4(s):
@@ -25,12 +25,13 @@ class Solution:
             
         def isIPv6(s):
             if len(s) > 4: return False
+            if len(s) == 0: return True
             try: return int(s, 16) >= 0 and s[0] != '-'
             except: return False
 
         if IP.count(".") == 3 and all(isIPv4(i) for i in IP.split(".")): 
             return "IPv4"
-        if IP.count(":") == 7 and all(isIPv6(i) for i in IP.split(":")): 
+        if IP.count(":") <= 7 and all(isIPv6(i) for i in IP.split(":")): 
             return "IPv6"
         return "Neither"
         

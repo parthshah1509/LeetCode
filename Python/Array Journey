@@ -1,0 +1,41 @@
+Array Journey
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.Arrays;
+import java.util.Collections;
+
+public class ArrayJourney {
+    public static int aj(int[] path, int k){
+        Integer[] steps = new Integer[k];
+        Arrays.fill(steps, 0);
+        for(int i = path.length-1; i>=0; i--){
+            int curr_step = path[i] + Collections.max(Arrays.asList(steps));
+            System.out.println(curr_step);
+            System.arraycopy(steps,1,steps,0, steps.length-1);
+            steps[steps.length-1] = curr_step;
+        }
+        return Collections.max(Arrays.asList(steps));
+    }
+
+    public static void main(String[] args) {
+        int[] path = {10,-20, -5};
+        int[] path2 = {10,2,-10,5,20};
+        System.out.println(aj(path, 2));
+        System.out.println(aj(path2, 2));
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------
+
+from typing import List
+class solution:
+	def ArrayJourney(k: int, path: List[int]) -> int:
+	    steps = [0] * k
+	    for i in reversed(range(len(path))):
+	        curr_step = path[i] + max(steps)
+	        steps = steps[1:]
+	        steps.append(curr_step)
+	    print(max(steps))
+	    return max(steps)
+

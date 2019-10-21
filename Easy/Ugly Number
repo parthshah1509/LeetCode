@@ -1,0 +1,45 @@
+263. Ugly Number II
+
+Write a program to return the nth Ugly Number.
+
+Ugly numbers are positive numbers whose prime factors only include 2, 3, 5.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+class Solution {
+    public int NthUgly(int num) {
+        if(num <= 0)
+            return false;
+        int dp[] = new int[num];
+        int i2 = 0;
+        int i3 = 0;
+        int i5 = 0;
+        int next_multiple_of_2 = 2;
+        int next_multiple_of_3 = 3;
+        int next_multiple_of_5 = 5;
+        dp[0] = 1;
+        
+        for(int i = 1; i < num; i++){
+            int next_number = Math.min(Math.min(next_multiple_of_2,next_multiple_of_3),next_multiple_of_5);
+            dp[i] = next_number;
+            
+            if(next_number == next_multiple_of_2){
+                i2+=1;
+                next_multiple_of_2 = dp[i2]*2;
+            }
+            
+            if(next_number == next_multiple_of_3){
+                i3+=1;
+                next_multiple_of_3 = dp[i3]*3;
+            }
+            
+            if(next_number == next_multiple_of_5){
+                i5+=1;
+                next_multiple_of_5 = dp[i5]*5; 
+            }
+        }
+        System.out.println(Arrays.toString(dp));
+        
+       	return next_number;
+    }
+}
