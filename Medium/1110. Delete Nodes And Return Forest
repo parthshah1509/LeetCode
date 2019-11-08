@@ -1,0 +1,53 @@
+1110. Delete Nodes And Return Forest
+
+Given the root of a binary tree, each node in the tree has a distinct value.
+
+After deleting all nodes with a value in to_delete, we are left with a forest (a disjoint union of trees).
+
+Return the roots of the trees in the remaining forest.  You may return the result in any order.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        List<TreeNode> remaining = new ArrayList<>();
+        Set<Integer> toDelete = new HashSet<>();
+        for(int i : to_delete)
+            toDelete.add(i);
+        
+        deleteNodes(root, toDelete, remaining);
+        if(!toDelete.contains(root.val)){
+            remaining.add(root);
+        }
+        
+        return remaining;
+    }
+    
+    public TreeNode deleteNodes(TreeNode root, Set<Integer> toDelete, List<TreeNode> remaining){
+        
+        if(root == null){
+            return null;
+        }
+        
+        root.left = deleteNodes(root.left, toDelete, remaining);
+        root.right = deleteNodes(root.right, toDelete, remaining);
+        
+        if(toDelete.contains(root.val)){
+            if(root.left != null)
+                remaining.add(root.left);
+            if(root.right != null)
+                remaining.add(root.right);
+            return null;
+        }
+        return root;
+    }
+}

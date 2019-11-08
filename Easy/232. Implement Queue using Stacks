@@ -1,0 +1,60 @@
+232. Implement Queue using Stacks
+
+Implement the following operations of a queue using stacks.
+
+push(x) -- Push element x to the back of queue.
+pop() -- Removes the element from in front of queue.
+peek() -- Get the front element.
+empty() -- Return whether the queue is empty.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+class MyQueue {
+    
+    Stack<Integer> stackNewest;
+    Stack<Integer> stackOldest;
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        stackNewest = new Stack();
+        stackOldest = new Stack();
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        stackNewest.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        moveToStack();
+        return stackOldest.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        moveToStack();
+        return stackOldest.peek();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return stackOldest.isEmpty() && stackNewest.isEmpty();
+    }
+    
+    public void moveToStack(){
+        if(stackOldest.isEmpty()){
+            while(!stackNewest.isEmpty())
+                stackOldest.push(stackNewest.pop());
+        }
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */

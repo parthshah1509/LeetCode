@@ -1,0 +1,54 @@
+133. Clone Graph
+
+Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph. Each node in the graph contains a val (int) and a list (List[Node]) of its neighbors.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+
+    public Node() {}
+
+    public Node(int _val,List<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+};
+*/
+class Solution {
+    public Node cloneGraph(Node node) {
+        Node curr = node;
+        Node ret = node;
+        HashSet<Node> seen = new HashSet();
+        Map<Node,Node> map = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        seen.add(node);
+        while(!queue.isEmpty()){
+            curr = queue.poll();
+            seen.add(curr);
+            Node temp = new Node(curr.val);
+            map.put(curr,temp);
+            for(int k = 0; k < curr.neighbors.size(); k++){
+                Node oneNode = curr.neighbors.get(k);
+                if(!seen.contains(oneNode)){
+                    queue.add(oneNode);
+                    seen.add(oneNode);
+                }
+            }
+        }
+        for(Node currt : map.keySet()){
+            ret = map.get(currt);
+            List<Node> neighborsList = new ArrayList(); 
+            for(int j = 0; j < currt.neighbors.size(); j++){
+                Node ne = currt.neighbors.get(j);
+                neighborsList.add(map.get(ne));
+            }
+            ret.neighbors = neighborsList;
+        }
+        return map.get(node);
+    }
+}
