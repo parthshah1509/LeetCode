@@ -1,4 +1,4 @@
-//TwoPointer
+//TwoPointer Method
 
 // Two pointer technique based solution to find 
 // if there is a pair in A[0..N-1] with a given sum. b
